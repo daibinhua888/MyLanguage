@@ -128,7 +128,7 @@ namespace ConsoleApplication8.Tokens.ASTValidators
 
         private void BackToken()
         {
-            astParser.SetPosition(this.savePoint_Position);
+            astParser.SetPosition(this.savePoint_Position-1);
             this.currentToken = astParser.Get();
         }
 

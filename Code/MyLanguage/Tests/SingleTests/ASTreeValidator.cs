@@ -13,6 +13,9 @@ namespace ConsoleApplication8.Tests.SingleTests
         public static void Test()
         {
             DoTest("a=100+200;");
+            DoTest("a=100;");
+            DoTest("a=100   ;");
+            //DoTest("a=100 a  ;");
 
 //            DoTest(@"
 //

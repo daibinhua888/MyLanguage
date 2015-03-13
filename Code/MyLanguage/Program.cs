@@ -25,6 +25,7 @@ namespace ConsoleApplication8
 
             //ASTreeTest.Test();
 
+            Console.WriteLine("OK");
             Console.ReadKey();
         }
     }

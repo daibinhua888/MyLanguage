@@ -23,6 +23,7 @@ namespace ConsoleApplication8.Tokens
         RightRoundBracket,  //  )
         LeftBracket,        //  [
         RightBracket,       //  ]
+        Comma,              //  ,
         PlaceHolder,        //  占位符，无具体意义
     }
 }

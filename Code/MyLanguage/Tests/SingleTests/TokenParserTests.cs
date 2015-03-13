@@ -25,6 +25,9 @@ namespace ConsoleApplication8.Tests.SingleTests
 ");
             DoTest("a=\"testing\";");       //目前还不支持双引号之中套双引号
             DoTest(@"a=""testing"";");      //同上
+
+            DoTest("show a;");
+            DoTest("show a, 100;");
         }
 
         private static void DoTest(string codes)

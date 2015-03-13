@@ -66,6 +66,7 @@
     <Compile Include="Tokens\Token.cs" />
     <Compile Include="Tokens\TokenType.cs" />
     <Compile Include="UserFunctions\01.cs" />
+    <Compile Include="Utility.cs" />
     <Compile Include="VariableTables\Enviroment.cs" />
   </ItemGroup>
   <ItemGroup>

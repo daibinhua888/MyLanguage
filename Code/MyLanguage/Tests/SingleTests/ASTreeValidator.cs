@@ -12,16 +12,30 @@ namespace ConsoleApplication8.Tests.SingleTests
     {
         public static void Test()
         {
+            Console.WriteLine("*************Assign Statement Validate*******************");
             DoTest("a=100+200;");
             DoTest("a=100;");
             DoTest("a=100   ;");
-            //DoTest("a=100 a  ;");
+            DoTest("a=100  + 200 -   56;");
 
-//            DoTest(@"
-//
-//show a;
-//
-//");
+            Utility.TryDo(() =>
+            {
+                DoTest("a=100  + 200 -   56  asdfa;");
+            }, (ex) => { Console.WriteLine(ex.Message); });
+            Console.WriteLine("*************Function Invoke Validate DONE*******************");
+
+
+            Console.WriteLine("*************Function Invoke Validate*******************");
+            DoTest("myfunction a;");
+            DoTest("myfunction 100;");
+            DoTest("myfunction a, 100;");
+            DoTest("myfunction a, 100, b;");
+            DoTest("myfunction a, 100, b,              300;");
+            Utility.TryDo(() =>
+            {
+                DoTest("myfunction a, 100, b);");
+            }, (ex) => { Console.WriteLine(ex.Message); });
+            Console.WriteLine("*************Function Invoke Validate DONE*******************");
         }
 
         private static void DoTest(string codes)

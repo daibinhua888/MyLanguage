@@ -28,9 +28,7 @@ namespace ConsoleApplication8.Tokens.ASTValidators
             if (currentToken.Type == TokenType.Identifier && PeekToken(1).Type == TokenType.Equals)
                 AssignStatementRule();
             else if (currentToken.Type == TokenType.Identifier && PeekToken(1).Type != TokenType.Equals)
-            {
-                //MethodStatement
-            }
+                FunctionInvokeStatementRule();
             else
                 throw new InvalidOperationException("不支持的语句");
         }
@@ -45,6 +43,24 @@ namespace ConsoleApplication8.Tokens.ASTValidators
             this.currentToken = astParser.Get();
         }
 
+        #region 方法调用语句
+        private void FunctionInvokeStatementRule()
+        {
+            Match(TokenType.Identifier);
+
+            MatchOne(TokenType.Identifier, TokenType.Number);
+
+            while (this.currentToken.Type != TokenType.EndOfStatement)
+            {
+                Match(TokenType.Comma);
+                MatchOne(TokenType.Identifier, TokenType.Number);
+            }
+
+            Match(TokenType.EndOfStatement);
+        }
+        #endregion
+
+        #region 赋值语句
         private void AssignStatementRule()
         {
             Match(TokenType.Identifier);
@@ -89,7 +105,6 @@ namespace ConsoleApplication8.Tokens.ASTValidators
         }
         #endregion
 
-
         #region MultipleNumberExpression
         private bool ExpressionRule_IsMultipleNumberExpression()
         {
@@ -109,16 +124,19 @@ namespace ConsoleApplication8.Tokens.ASTValidators
             return success;
         }
 
-        //NUMBER (+|-|*|/) NUMBER
+        //NUMBER (+|-|*|/) NUMBER (+|-|*|/) NUMBER (+|-|*|/) NUMBER
         private void ExpressionRule_MultipleNumberExpression()
         {
             Match(TokenType.Number);
-            MatchOne(TokenType.Plus, TokenType.Minus, TokenType.Multiply, TokenType.Divide);
-            Match(TokenType.Number);
+            while (this.currentToken.Type!= TokenType.EndOfStatement)
+            {
+                MatchOne(TokenType.Plus, TokenType.Minus, TokenType.Multiply, TokenType.Divide);
+                Match(TokenType.Number);
+            }
             Match(TokenType.EndOfStatement);
         }
         #endregion
-
+        #endregion
 
 
         private void SaveToken()

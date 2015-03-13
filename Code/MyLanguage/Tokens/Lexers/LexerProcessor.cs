@@ -62,6 +62,8 @@ namespace ConsoleApplication8.Tokens.Lexers
                 return Identifier(c);
             else if (helper.IsOperator(c))          //操作符号，比如+-*/、括号等
                 return Operator(c);
+            else if (helper.IsSeperator(c))         //间隔符，比如,
+                return Seperator(c);
             else
                 throw new InvalidOperationException();
         }
@@ -111,6 +113,14 @@ namespace ConsoleApplication8.Tokens.Lexers
                 UnReadChar();
 
             return new Token(sb.ToString(), TokenType.Number);
+        }
+
+        private Token Seperator(char c)
+        {
+            if (c == ',')
+                return new Token(TokenType.Comma);
+            else
+                throw new Exception("无效间隔符");
         }
 
         private Token Operator(char c)

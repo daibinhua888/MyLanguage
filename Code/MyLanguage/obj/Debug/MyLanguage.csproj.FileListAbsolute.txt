@@ -20,3 +20,9 @@ C:\Users\Aaron\Documents\GitHub\MyLanguage\Code\MyLanguage\obj\Debug\ConsoleAppl
 C:\Users\Aaron\Documents\GitHub\MyLanguage\Code\MyLanguage\bin\Debug\ConsoleApplication8.exe
 C:\Users\Aaron\Documents\GitHub\MyLanguage\Code\MyLanguage\bin\Debug\ConsoleApplication8.pdb
 C:\Users\Aaron\Documents\GitHub\MyLanguage\Code\MyLanguage\obj\Debug\MyLanguage.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\GitHub\MyLanguage\Code\MyLanguage\bin\Debug\ConsoleApplication8.exe.config
+C:\Users\Administrator\Documents\GitHub\MyLanguage\Code\MyLanguage\obj\Debug\ConsoleApplication8.exe
+C:\Users\Administrator\Documents\GitHub\MyLanguage\Code\MyLanguage\obj\Debug\ConsoleApplication8.pdb
+C:\Users\Administrator\Documents\GitHub\MyLanguage\Code\MyLanguage\bin\Debug\ConsoleApplication8.exe
+C:\Users\Administrator\Documents\GitHub\MyLanguage\Code\MyLanguage\bin\Debug\ConsoleApplication8.pdb
+C:\Users\Administrator\Documents\GitHub\MyLanguage\Code\MyLanguage\obj\Debug\MyLanguage.csprojResolveAssemblyReference.cache

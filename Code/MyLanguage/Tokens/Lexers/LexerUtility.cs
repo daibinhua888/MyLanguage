@@ -34,6 +34,16 @@ namespace ConsoleApplication8.Tokens.Lexers
             return false;
         }
 
+        public bool IsSeperator(char c)
+        {
+            char[] operators = { ','};
+
+            if (operators.Contains(c))
+                return true;
+
+            return false;
+        }
+
         public bool IsLetter(char c)
         {
             if (c >= 'a' && c <= 'z')

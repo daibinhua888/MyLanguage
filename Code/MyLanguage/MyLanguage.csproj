@@ -50,8 +50,10 @@
     <Compile Include="OldAST\LiteralNode.cs" />
     <Compile Include="OldAST\VariableNode.cs" />
     <Compile Include="Tests\SingleTests\ASTreeTest.cs" />
+    <Compile Include="Tests\SingleTests\ASTreeValidator.cs" />
     <Compile Include="Tokens\ASTParsers\DefaultASTParser.cs" />
     <Compile Include="Tokens\ASTParsers\DefaultASTParserWrapper.cs" />
+    <Compile Include="Tokens\ASTValidators\DefaultASTValidatorWrapper.cs" />
     <Compile Include="Tokens\Lexers\LexerProcessor.cs" />
     <Compile Include="Tokens\Lexers\Lexer.cs" />
     <Compile Include="Program.cs" />

@@ -28,9 +28,9 @@ namespace ConsoleApplication8.Tokens.Lexers
             return token;
         }
 
-        public Queue<Token> GetAllTokens()
+        public List<Token> GetAllTokens()
         {
-            Queue<Token> queue = new Queue<Token>();
+            List<Token> tokens = new List<Token>();
 
             while (true)
             {
@@ -39,10 +39,10 @@ namespace ConsoleApplication8.Tokens.Lexers
                 if (token == null)
                     break;
 
-                queue.Enqueue(token);
+                tokens.Add(token);
             }
 
-            return queue;
+            return tokens;
         }
     }
 }

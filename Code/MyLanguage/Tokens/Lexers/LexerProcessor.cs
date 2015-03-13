@@ -9,6 +9,9 @@ namespace ConsoleApplication8.Tokens.Lexers
     public class LexerProcessor
     {
         private string rawString;
+
+        private LexerUtility helper = new LexerUtility();
+        
         public LexerProcessor(string rawString)
         {
             this.rawString = rawString;
@@ -17,8 +20,6 @@ namespace ConsoleApplication8.Tokens.Lexers
         private int currentPos = -1;
         private bool alreadyEOF = false;
         private bool returnedEOF = false;
-
-        private LexerUtility helper = new LexerUtility();
 
         private char ReadChar()
         {
@@ -39,6 +40,7 @@ namespace ConsoleApplication8.Tokens.Lexers
             alreadyEOF = false;
         }
 
+        #region Token parser
         public Token RecognizeToken()
         {
             if (alreadyEOF && returnedEOF)
@@ -111,7 +113,7 @@ namespace ConsoleApplication8.Tokens.Lexers
             return new Token(sb.ToString(), TokenType.Number);
         }
 
-        private static Token Operator(char c)
+        private Token Operator(char c)
         {
             if (c == '=')
                 return new Token(TokenType.Equals);
@@ -135,7 +137,7 @@ namespace ConsoleApplication8.Tokens.Lexers
                 throw new Exception("无效操作符");
         }
 
-        private static Token EOS()
+        private Token EOS()
         {
             return new Token(TokenType.EndOfStatement);
         }
@@ -145,5 +147,6 @@ namespace ConsoleApplication8.Tokens.Lexers
             returnedEOF = true;
             return new Token(TokenType.EndOfFile);
         }
+        #endregion
     }
 }

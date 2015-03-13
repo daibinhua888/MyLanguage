@@ -13,15 +13,17 @@ namespace ConsoleApplication8
     {
         static void Main(string[] args)
         {
-            TokenParserTests.Test();
+            //TokenParserTests.Test();
 
-            TokenTest.Test();
+            //TokenTest.Test();
 
-            ASTTest.Test();
+            //ASTTest.Test();
 
-            ExecutorTest.Test();
+            //ExecutorTest.Test();
 
-            ASTreeTest.Test();
+            ASTreeValidator.Test();
+
+            //ASTreeTest.Test();
 
             Console.ReadKey();
         }

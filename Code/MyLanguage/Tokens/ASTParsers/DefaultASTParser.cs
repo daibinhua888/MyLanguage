@@ -9,31 +9,36 @@ namespace ConsoleApplication8.Tokens.ASTParsers
 {
     public class DefaultASTParser
     {
-        private Queue<Token> tokens;
-        public DefaultASTParser(Queue<Token> tokens)
+        private List<Token> tokens;
+        public DefaultASTParser(List<Token> tokens)
         {
             this.tokens = tokens;
         }
 
-        private Token currentToken;
+        private int position = -1;
+
+        public int GetPosition()
+        {
+            return this.position;
+        }
+
+        public void SetPosition(int position)
+        {
+            this.position = position;
+        }
+
         public Token Get()
         {
-            this.currentToken=this.tokens.Dequeue();
-            return this.currentToken;
+            this.position++;
+            return this.tokens[this.position];
         }
 
         public Token Peek(int peekPosition)
         {
-            if (peekPosition < 0)
-                throw new Exception();
+            if (this.position + peekPosition >= this.tokens.Count)
+                throw new InvalidOperationException();
 
-            if (peekPosition > 1)
-                throw new Exception();
-
-            if (peekPosition == 0)
-                return this.currentToken;
-
-            return tokens.Peek();
+            return this.tokens[this.position + peekPosition];
         }
     }
 }

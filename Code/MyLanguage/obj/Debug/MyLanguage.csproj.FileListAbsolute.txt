@@ -14,3 +14,9 @@ D:\BaiduYunDownload\MyLanguage(4)\MyLanguage\obj\Debug\ConsoleApplication8.pdb
 D:\BaiduYunDownload\MyLanguage(4)\MyLanguage\obj\Debug\MyLanguage.csprojResolveAssemblyReference.cache
 D:\BaiduYunDownload\MyLanguage(4)\MyLanguage\bin\Debug\ConsoleApplication8.exe
 D:\BaiduYunDownload\MyLanguage(4)\MyLanguage\bin\Debug\ConsoleApplication8.pdb
+C:\Users\Aaron\Documents\GitHub\MyLanguage\Code\MyLanguage\bin\Debug\ConsoleApplication8.exe.config
+C:\Users\Aaron\Documents\GitHub\MyLanguage\Code\MyLanguage\obj\Debug\ConsoleApplication8.exe
+C:\Users\Aaron\Documents\GitHub\MyLanguage\Code\MyLanguage\obj\Debug\ConsoleApplication8.pdb
+C:\Users\Aaron\Documents\GitHub\MyLanguage\Code\MyLanguage\bin\Debug\ConsoleApplication8.exe
+C:\Users\Aaron\Documents\GitHub\MyLanguage\Code\MyLanguage\bin\Debug\ConsoleApplication8.pdb
+C:\Users\Aaron\Documents\GitHub\MyLanguage\Code\MyLanguage\obj\Debug\MyLanguage.csprojResolveAssemblyReference.cache

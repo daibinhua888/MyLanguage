@@ -1,5 +1,5 @@
-﻿using ConsoleApplication8.Tokens.ASTValidators;
-using ConsoleApplication8.Tokens.Lexers;
+﻿using ConsoleApplication8.Tokens.Lexers;
+using ConsoleApplication8.Tokens.Parsers.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,13 +36,23 @@ namespace ConsoleApplication8.Tests.SingleTests
                 DoTest("myfunction a, 100, b);");
             }, (ex) => { Console.WriteLine(ex.Message); });
             Console.WriteLine("*************Function Invoke Validate DONE*******************");
+
+
+            Console.WriteLine("*************花括号验证 Validate*******************");
+            DoTest(@"{    a=100;}  ");
+            DoTest(@"{    myfunction a, 100, b;   }  ");
+            Utility.TryDo(() =>
+            {
+                DoTest("{    myfuncti1on a, 100, b;   }  ");
+            }, (ex) => { Console.WriteLine(ex.Message); });
+            Console.WriteLine("*************花括号验证 Validate DONE*******************");
         }
 
         private static void DoTest(string codes)
         {
             var tokenParser = new Lexer(codes);
 
-            var validator = new DefaultASTValidatorWrapper(tokenParser);
+            var validator = new DefaultValidator(tokenParser);
 
             validator.Validate();
         }

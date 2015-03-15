@@ -6,15 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication8.Tokens.ASTParsers
+namespace ConsoleApplication8.Tokens.Parsers.ASTParsers
 {
     public class DefaultASTParserWrapper
     {
-        private DefaultASTParser astParser;
+        private TokenPool astParser;
 
         public DefaultASTParserWrapper(Lexer tokenParser)
         {
-            this.astParser = new DefaultASTParser(tokenParser.GetAllTokens());
+            this.astParser = new TokenPool(tokenParser.GetAllTokens());
         }
 
 

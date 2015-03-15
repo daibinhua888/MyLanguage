@@ -1,11 +1,12 @@
 ﻿using ConsoleApplication8.ASTrees;
-using ConsoleApplication8.Tokens.ASTParsers;
+using ConsoleApplication8.Tokens.Parsers;
 using ConsoleApplication8.Tokens.Lexers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConsoleApplication8.Tokens.Parsers.ASTParsers;
 
 namespace ConsoleApplication8.Tests.SingleTests
 {

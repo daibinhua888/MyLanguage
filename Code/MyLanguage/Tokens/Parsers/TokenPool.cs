@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication8.Tokens.ASTParsers
+namespace ConsoleApplication8.Tokens.Parsers
 {
-    public class DefaultASTParser
+    public class TokenPool
     {
         private List<Token> tokens;
-        public DefaultASTParser(List<Token> tokens)
+        public TokenPool(List<Token> tokens)
         {
             this.tokens = tokens;
         }

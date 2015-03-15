@@ -51,9 +51,10 @@
     <Compile Include="OldAST\VariableNode.cs" />
     <Compile Include="Tests\SingleTests\ASTreeTest.cs" />
     <Compile Include="Tests\SingleTests\ASTreeValidator.cs" />
-    <Compile Include="Tokens\ASTParsers\DefaultASTParser.cs" />
-    <Compile Include="Tokens\ASTParsers\DefaultASTParserWrapper.cs" />
-    <Compile Include="Tokens\ASTValidators\DefaultASTValidatorWrapper.cs" />
+    <Compile Include="Tokens\Parsers\TokenPool.cs" />
+    <Compile Include="Tokens\Parsers\ASTParsers\DefaultASTParserWrapper.cs" />
+    <Compile Include="Tokens\Parsers\Validators\BaseValidator.cs" />
+    <Compile Include="Tokens\Parsers\Validators\DefaultValidator.cs" />
     <Compile Include="Tokens\Lexers\LexerProcessor.cs" />
     <Compile Include="Tokens\Lexers\Lexer.cs" />
     <Compile Include="Program.cs" />
@@ -75,7 +76,9 @@
   <ItemGroup>
     <Content Include="lost.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Tokens\ASTValidators\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

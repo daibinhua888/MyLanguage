@@ -26,17 +26,7 @@ namespace ConsoleApplication8.Tokens.Lexers
 
         public bool IsOperator(char c)
         {
-            char[] operators = { '=', '+', '-', '*', '/', '(', ')', '[', ']' };
-
-            if (operators.Contains(c))
-                return true;
-
-            return false;
-        }
-
-        public bool IsSeperator(char c)
-        {
-            char[] operators = { ','};
+            char[] operators = { '=', '+', '-', '*', '/', '(', ')', '[', ']', ',', '{', '}'};
 
             if (operators.Contains(c))
                 return true;

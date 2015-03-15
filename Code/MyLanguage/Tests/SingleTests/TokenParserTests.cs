@@ -28,6 +28,14 @@ namespace ConsoleApplication8.Tests.SingleTests
 
             DoTest("show a;");
             DoTest("show a, 100;");
+
+            DoTest(@"
+a=100  +   200         ;
+{
+    b=a+1;
+    c=100;
+}
+");
         }
 
         private static void DoTest(string codes)

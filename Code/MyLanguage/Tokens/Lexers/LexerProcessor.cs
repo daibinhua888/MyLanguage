@@ -58,7 +58,7 @@ namespace ConsoleApplication8.Tokens.Lexers
                 return Number(c);
             else if (helper.IsQuoteMark(c))        //双引号文本字符串
                 return QuoteMark();
-            else if (helper.IsLetter(c))           //标示符号（变量名、函数名、方法名、保留关键字）
+            else if (helper.IsIdentifierBegining(c))           //标示符号（变量名、函数名、方法名、保留关键字）
                 return Identifier(c);
             else if (helper.IsOperator(c))          //操作符号，比如+-*/、括号等
                 return Operator(c);
@@ -70,13 +70,13 @@ namespace ConsoleApplication8.Tokens.Lexers
         {
             StringBuilder sb = new StringBuilder();
 
-            while (helper.IsLetter(c) && !helper.IsEOF(c))
+            while (helper.IsIdentifierChar(c) && !helper.IsEOF(c))
             {
                 sb.Append(c);
                 c = ReadChar();
             }
 
-            if (!helper.IsLetter(c) && !helper.IsEOF(c))
+            if (!helper.IsIdentifierChar(c) && !helper.IsEOF(c))
                 UnReadChar();
 
             return new Token(sb.ToString(), TokenType.Identifier);
@@ -116,7 +116,7 @@ namespace ConsoleApplication8.Tokens.Lexers
         private Token Operator(char c)
         {
             if (c == '=')
-                return new Token(TokenType.Equals);
+                return StartAsEqual();
             else if (c == '+')
                 return new Token(TokenType.Plus);
             else if (c == '-')
@@ -141,6 +141,16 @@ namespace ConsoleApplication8.Tokens.Lexers
                 return new Token(TokenType.RightBrace);
             else
                 throw new Exception("无效操作符");
+        }
+
+        private Token StartAsEqual()
+        {
+            char c=ReadChar();
+            if(c=='=')
+                return new Token(TokenType.CompareEquals);
+
+            UnReadChar();
+            return new Token(TokenType.Equals);
         }
 
         private Token EOS()

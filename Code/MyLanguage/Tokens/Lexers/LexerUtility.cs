@@ -34,12 +34,29 @@ namespace ConsoleApplication8.Tokens.Lexers
             return false;
         }
 
-        public bool IsLetter(char c)
+        public bool IsIdentifierBegining(char c)
         {
             if (c >= 'a' && c <= 'z')
                 return true;
 
             if (c >= 'A' && c <= 'Z')
+                return true;
+
+            return false;
+        }
+
+        public bool IsIdentifierChar(char c)
+        {
+            if (c >= 'a' && c <= 'z')
+                return true;
+
+            if (c >= 'A' && c <= 'Z')
+                return true;
+
+            if (c >= '0' && c <= '9')
+                return true;
+
+            if (c == '_')
                 return true;
 
             return false;

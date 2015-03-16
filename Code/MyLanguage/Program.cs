@@ -21,7 +21,7 @@ namespace ConsoleApplication8
 
             ExecutorTest.Test();
 
-            ASTreeValidator.Test();
+            SyntaxValidatorTest.Test();
 
             //ASTreeTest.Test();
 

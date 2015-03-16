@@ -36,6 +36,10 @@ a=100  +   200         ;
     c=100;
 }
 ");
+
+            DoTest("show a, 100;");
+
+            DoTest("if(a==100){myfuncation 100;}else{myfun111cation 200;}");
         }
 
         private static void DoTest(string codes)

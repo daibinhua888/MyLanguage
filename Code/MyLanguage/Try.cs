@@ -6,17 +6,22 @@ using System.Threading.Tasks;
 
 namespace ConsoleApplication8
 {
-    public class Utility
+    public class Try
     {
-        public static void TryDo(Action action, Action<Exception> exceptionAction)
+        public static Action OnException;
+
+        public static void Execute(Action action)
         {
             try
             {
                 action();
             }
-            catch (Exception ex)
+            catch
             {
-                exceptionAction(ex);
+                if (OnException != null)
+                    OnException();
+                else
+                    throw;
             }
         }
     }

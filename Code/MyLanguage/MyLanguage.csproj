@@ -50,11 +50,16 @@
     <Compile Include="OldAST\LiteralNode.cs" />
     <Compile Include="OldAST\VariableNode.cs" />
     <Compile Include="Tests\SingleTests\ASTreeTest.cs" />
-    <Compile Include="Tests\SingleTests\ASTreeValidator.cs" />
+    <Compile Include="Tests\SingleTests\SyntaxValidatorTest.cs" />
     <Compile Include="Tokens\Parsers\TokenPool.cs" />
     <Compile Include="Tokens\Parsers\ASTParsers\DefaultASTParserWrapper.cs" />
-    <Compile Include="Tokens\Parsers\Validators\BaseValidator.cs" />
-    <Compile Include="Tokens\Parsers\Validators\DefaultValidator.cs" />
+    <Compile Include="Tokens\Parsers\Validators\ConcreteRules\ElseRule.cs" />
+    <Compile Include="Tokens\Parsers\Validators\SyntaxValidator.cs" />
+    <Compile Include="Tokens\Parsers\Validators\ConcreteRules\AssignRule.cs" />
+    <Compile Include="Tokens\Parsers\Validators\ConcreteRules\BlockRule.cs" />
+    <Compile Include="Tokens\Parsers\Validators\ConcreteRules\FunctionInvokeRule.cs" />
+    <Compile Include="Tokens\Parsers\Validators\ConcreteRules\IfRule.cs" />
+    <Compile Include="Tokens\Parsers\Validators\ConcreteRules\WhileRule.cs" />
     <Compile Include="Tokens\Lexers\LexerProcessor.cs" />
     <Compile Include="Tokens\Lexers\Lexer.cs" />
     <Compile Include="Program.cs" />
@@ -64,10 +69,13 @@
     <Compile Include="Tests\SingleTests\TokenParserTests.cs" />
     <Compile Include="Tests\SingleTests\TokenTest.cs" />
     <Compile Include="Tokens\Lexers\LexerUtility.cs" />
+    <Compile Include="Tokens\Parsers\Validators\ConcreteRules\StatementDetecter.cs" />
+    <Compile Include="Tokens\Parsers\Validators\IRuleProcessor.cs" />
+    <Compile Include="Tokens\Parsers\Validators\StatementType.cs" />
     <Compile Include="Tokens\Token.cs" />
     <Compile Include="Tokens\TokenType.cs" />
     <Compile Include="UserFunctions\01.cs" />
-    <Compile Include="Utility.cs" />
+    <Compile Include="Try.cs" />
     <Compile Include="VariableTables\Enviroment.cs" />
   </ItemGroup>
   <ItemGroup>

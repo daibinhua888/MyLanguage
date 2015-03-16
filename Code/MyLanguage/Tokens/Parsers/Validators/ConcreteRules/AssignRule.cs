@@ -40,18 +40,18 @@ namespace ConsoleApplication8.Tokens.Parsers.Validators.ConcreteRules
         //NUMBER
         private void ExpressionRule_SingleNumberExpression()
         {
-            this.validator.Match(TokenType.Number);
+            this.validator.MatchOne(TokenType.Number, TokenType.Identifier);
             this.validator.Match(TokenType.EndOfStatement);
         }
 
         //NUMBER (+|-|*|/) NUMBER (+|-|*|/) NUMBER (+|-|*|/) NUMBER
         private void ExpressionRule_MultipleNumberExpression()
         {
-            this.validator.Match(TokenType.Number);
+            this.validator.MatchOne(TokenType.Number, TokenType.Identifier);
             while (this.validator.currentToken.Type != TokenType.EndOfStatement)
             {
                 this.validator.MatchOne(TokenType.Plus, TokenType.Minus, TokenType.Multiply, TokenType.Divide);
-                this.validator.Match(TokenType.Number);
+                this.validator.MatchOne(TokenType.Number, TokenType.Identifier);
             }
             this.validator.Match(TokenType.EndOfStatement);
         }

@@ -34,6 +34,13 @@ namespace ConsoleApplication8.Tests.SingleTests
             Try.Execute(() => DoTest("if(a==100){myfuncation 100;}else{myfun111cation 200, id3;}"));
             Try.Execute(() => DoTest("if(a==100){myfuncation 100;}else{myfun111cation 200 564456546;}"));
             Try.Execute(() => DoTest("if(a==100){myfuncation 100;}else{myfun111cation 200 ==564456546;}"));
+            Try.Execute(() => DoTest("while(a==100){myfuncation 100;}"));
+            Try.Execute(() => DoTest("while(a==100){a=100;}"));
+            Try.Execute(() => DoTest("while(a==100){a=100+200;}"));
+            Try.Execute(() => DoTest("while(a==100){a=100+200+600;}"));
+            Try.Execute(() => DoTest("while(a==100){a=100+200+600+;}"));
+            Try.Execute(() => DoTest("while(a==100){a=100+200+600+a;}"));
+            Try.Execute(() => DoTest("while(a==100){a=a+1;}"));
         }
 
         private static void OnException()

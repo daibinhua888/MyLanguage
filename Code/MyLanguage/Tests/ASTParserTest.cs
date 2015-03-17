@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using ConsoleApplication8.Utility;
 
 namespace ConsoleApplication8.Tests
 {
@@ -20,16 +22,16 @@ namespace ConsoleApplication8.Tests
             DoTest("a=100;");
             DoTest("a=100+200;");
             DoTest("a=100+200+a;");
-            DoTest("a=100+200+a-          23;");
+            DoTest("a=100+200+a-          23;", true);
 
-//            DoTest(@"
-//
-//show a;
-//
-//");
+            //            DoTest(@"
+            //
+            //show a;
+            //
+            //");
         }
 
-        private static void DoTest(string codes)
+        private static void DoTest(string codes, bool specialDisplay = false)
         {
             var tokenParser = new Lexer(codes);
 
@@ -40,15 +42,56 @@ namespace ConsoleApplication8.Tests
             Console.WriteLine();
             Console.WriteLine();
 
-            DisplayASTree(root);
+            if (!specialDisplay)
+                DisplayASTree(root);
+            else
+                DisplayASTByDot(root);
         }
-
-        //需要换成dot来展示树形结构
         private static void DisplayASTree(AST tree)
         {
             Console.WriteLine(tree.ToString());
             foreach (var node in tree.Children)
                 DisplayASTree(node);
+        }
+
+        private static string dotContent = string.Empty;
+        private static string nodeDefination = string.Empty;
+
+        private static void DisplayASTByDot(AST root)
+        {
+            /*
+            digraph hello {
+                    A -> B;    A -> C;   B -> D;    C -> D
+            }
+            */
+            WalkTree(root);
+
+            string txtContext = @"
+digraph hello {
+                    " + nodeDefination + @"
+                    " +dotContent+@"
+            }
+";
+
+            //save
+            FileHelper.Save(txtContext, "test.txt");
+            //execute
+            var p=Process.Start("dot.exe", " -Tpng test.txt -o test.png");
+            p.WaitForExit();
+            Process.Start("test.png");
+        }
+
+        private static void WalkTree(AST root)
+        {
+            var hId=root.GetHashCode();
+
+            nodeDefination += string.Format("{0}[label=\"{1}\"];", hId, root.ToString());
+
+            foreach(var node in root.Children)
+                dotContent += string.Format("{0} -> {1};", hId, node.GetHashCode());
+
+            foreach (var node in root.Children)
+                WalkTree(node);
         }
     }
 }

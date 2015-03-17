@@ -65,6 +65,7 @@
     <Compile Include="Tokens\Token.cs" />
     <Compile Include="Tokens\TokenType.cs" />
     <Compile Include="Try.cs" />
+    <Compile Include="Utility\FileHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -25,3 +25,4 @@ C:\Users\Administrator\Documents\GitHub\MyLanguage\Code\MyLanguage\obj\Debug\Con
 C:\Users\Administrator\Documents\GitHub\MyLanguage\Code\MyLanguage\obj\Debug\ConsoleApplication8.pdb
 C:\Users\Administrator\Documents\GitHub\MyLanguage\Code\MyLanguage\bin\Debug\ConsoleApplication8.exe
 C:\Users\Administrator\Documents\GitHub\MyLanguage\Code\MyLanguage\bin\Debug\ConsoleApplication8.pdb
+C:\Users\Administrator\Documents\GitHub\MyLanguage\Code\MyLanguage\obj\Debug\MyLanguage.csprojResolveAssemblyReference.cache

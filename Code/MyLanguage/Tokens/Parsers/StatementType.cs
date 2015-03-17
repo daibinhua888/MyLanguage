@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication8.Tokens.Parsers.Validators
+namespace ConsoleApplication8.Tokens.Parsers
 {
     public enum StatementType
     {

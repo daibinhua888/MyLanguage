@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication8.Tokens.Parsers.Validators.ConcreteRules
+namespace ConsoleApplication8.Tokens.Parsers.Rules
 {
-    public class ElseRule : IRuleProcessor
+    public class ElseRule : IRule
     {
-        private SyntaxValidator validator;
+        private ASTParser validator;
 
-        public ElseRule(SyntaxValidator validator)
+        public ElseRule(ASTParser validator)
         {
             this.validator = validator;
         }
 
-        public void ProcessRule()
+        public void Validate()
         {
             ElseStatementRule();
         }
@@ -25,6 +25,12 @@ namespace ConsoleApplication8.Tokens.Parsers.Validators.ConcreteRules
             this.validator.MatchAnd(TokenType.Identifier, "else");
 
             this.validator.RuleForward(StatementType.Block);
+        }
+
+
+        public ASTrees.AST AST()
+        {
+            throw new NotImplementedException();
         }
     }
 }

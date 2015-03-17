@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication8.Tokens.Parsers.Validators.ConcreteRules
+namespace ConsoleApplication8.Tokens.Parsers
 {
     public class StatementDetecter
     {
-        private SyntaxValidator validator;
+        private ASTParser validator;
 
-        public StatementDetecter(SyntaxValidator validator)
+        public StatementDetecter(ASTParser validator)
         {
             this.validator = validator;
         }

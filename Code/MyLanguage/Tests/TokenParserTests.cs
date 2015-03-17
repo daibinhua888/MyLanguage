@@ -5,12 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication8.Tests.SingleTests
+namespace ConsoleApplication8.Tests
 {
     class TokenParserTests
     {
         internal static void Test()
         {
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("=======   Token分词测试     ========");
+
             DoTest("a=100+200;");
 
             DoTest("a=100+200; ");

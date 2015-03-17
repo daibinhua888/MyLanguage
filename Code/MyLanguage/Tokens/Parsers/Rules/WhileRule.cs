@@ -4,37 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication8.Tokens.Parsers.Validators.ConcreteRules
+namespace ConsoleApplication8.Tokens.Parsers.Rules
 {
-    public class IfRule : IRuleProcessor
+    public class WhileRule : IRule
     {
-        private SyntaxValidator validator;
+        private ASTParser validator;
 
-        public IfRule(SyntaxValidator validator)
+        public WhileRule(ASTParser validator)
         {
             this.validator = validator;
         }
 
-        public void ProcessRule()
+        public void Validate()
         {
-            IfStatementRule();
+            WhileStatementRule();
         }
 
-        private void IfStatementRule()
+        private void WhileStatementRule()
         {
-            this.validator.MatchAnd(TokenType.Identifier, "if");
+            this.validator.MatchAnd(TokenType.Identifier, "while");
 
             ConditionRule();//condition rule
 
             //block rule
             this.validator.RuleForward(StatementType.Block);
-
-            //maybe exists else syntax
-            //and maybe else block
-            if (this.validator.CanRuleForward(StatementType.Else))
-                this.validator.RuleForward(StatementType.Else);
-            else
-                this.validator.Match(TokenType.EndOfStatement);
         }
 
         private void ConditionRule()
@@ -46,6 +39,12 @@ namespace ConsoleApplication8.Tokens.Parsers.Validators.ConcreteRules
             this.validator.Match(TokenType.Number);
 
             this.validator.Match(TokenType.RightRoundBracket);
+        }
+
+
+        public ASTrees.AST AST()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using ConsoleApplication8.Tests;
-using ConsoleApplication8.Tests.SingleTests;
 using ConsoleApplication8.Tokens;
 using System;
 using System.Collections.Generic;
@@ -13,17 +12,11 @@ namespace ConsoleApplication8
     {
         static void Main(string[] args)
         {
-            TokenParserTests.Test();
+            TokenParserTests.Test();                //分词测试
 
-            TokenTest.Test();
+            SyntaxValidatorTest.Test();             //语法测试
 
-            ASTTest.Test();
-
-            ExecutorTest.Test();
-
-            SyntaxValidatorTest.Test();
-
-            //ASTreeTest.Test();
+            ASTParserTest.Test();                   //构造AST树测试
 
             Console.WriteLine("OK");
             Console.ReadKey();

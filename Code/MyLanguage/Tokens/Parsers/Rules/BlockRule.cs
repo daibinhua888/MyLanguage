@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication8.Tokens.Parsers.Validators.ConcreteRules
+namespace ConsoleApplication8.Tokens.Parsers.Rules
 {
-    public class BlockRule : IRuleProcessor
+    public class BlockRule : IRule
     {
-        private SyntaxValidator validator;
+        private ASTParser validator;
 
-        public BlockRule(SyntaxValidator validator)
+        public BlockRule(ASTParser validator)
         {
             this.validator = validator;
         }
 
-        public void ProcessRule()
+        public void Validate()
         {
             BlockStatementRule();
         }
@@ -32,6 +32,12 @@ namespace ConsoleApplication8.Tokens.Parsers.Validators.ConcreteRules
                 throw new InvalidOperationException();
 
             this.validator.Match(TokenType.RightBrace);
+        }
+
+
+        public ASTrees.AST AST()
+        {
+            throw new NotImplementedException();
         }
     }
 }

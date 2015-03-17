@@ -1,14 +1,15 @@
-﻿using ConsoleApplication8.Tokens.Lexers;
-using ConsoleApplication8.Tokens.Parsers.Validators.ConcreteRules;
+﻿using ConsoleApplication8.ASTrees;
+using ConsoleApplication8.Tokens.Lexers;
+using ConsoleApplication8.Tokens.Parsers.Rules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication8.Tokens.Parsers.Validators
+namespace ConsoleApplication8.Tokens.Parsers
 {
-    public class SyntaxValidator
+    public class ASTParser
     {
         private TokenPool tokenPool;
         public Token currentToken;
@@ -16,25 +17,25 @@ namespace ConsoleApplication8.Tokens.Parsers.Validators
 
         private StatementDetecter detecter;
 
-        private IRuleProcessor assignRuleProcessor;
-        private IRuleProcessor blockRuleProcessor;
-        private IRuleProcessor functionInvokeProcessor;
-        private IRuleProcessor ifRuleProcessor;
-        private IRuleProcessor elseRuleProcessor;
-        private IRuleProcessor whileRuleProcessor;
+        private IRule assignRule;
+        private IRule blockRule;
+        private IRule functionInvokeRule;
+        private IRule ifRule;
+        private IRule elseRule;
+        private IRule whileRule;
 
-        public SyntaxValidator(Lexer tokenParser)
+        public ASTParser(Lexer tokenParser)
         {
             this.tokenPool = new TokenPool(tokenParser.GetAllTokens());
 
             this.detecter = new StatementDetecter(this);
 
-            this.assignRuleProcessor = new AssignRule(this);
-            this.blockRuleProcessor = new BlockRule(this);
-            this.functionInvokeProcessor = new FunctionInvokeRule(this);
-            this.ifRuleProcessor = new IfRule(this);
-            this.elseRuleProcessor = new ElseRule(this);
-            this.whileRuleProcessor = new WhileRule(this);
+            this.assignRule = new AssignRule(this);
+            this.blockRule = new BlockRule(this);
+            this.functionInvokeRule = new FunctionInvokeRule(this);
+            this.ifRule = new IfRule(this);
+            this.elseRule = new ElseRule(this);
+            this.whileRule = new WhileRule(this);
         }
 
         public void Validate()
@@ -44,6 +45,15 @@ namespace ConsoleApplication8.Tokens.Parsers.Validators
             var stateType = this.detecter.DetectStatementType();
 
             RuleForward(stateType);
+        }
+
+        public AST ToAST()
+        {
+            ReadToken();
+
+            var stateType = this.detecter.DetectStatementType();
+
+            return RuleForward_AST(stateType);
         }
 
         public Token PeekToken(int position)
@@ -107,6 +117,11 @@ namespace ConsoleApplication8.Tokens.Parsers.Validators
             throw new InvalidOperationException();
         }
 
+        public void Consume()
+        {
+            ReadToken();
+        }
+
         /// <summary>
         /// 测试规则是否可行
         /// </summary>
@@ -135,49 +150,76 @@ namespace ConsoleApplication8.Tokens.Parsers.Validators
             switch (stmtType)
             {
                 case StatementType.Assign:
-                    return CanRuleForward(this.assignRuleProcessor.ProcessRule);
+                    return CanRuleForward(this.assignRule.Validate);
                     break;
                 case StatementType.Block:
-                    return CanRuleForward(this.blockRuleProcessor.ProcessRule);
+                    return CanRuleForward(this.blockRule.Validate);
                     break;
                 case StatementType.FunctionInvoke:
-                    return CanRuleForward(this.functionInvokeProcessor.ProcessRule);
+                    return CanRuleForward(this.functionInvokeRule.Validate);
                     break;
                 case StatementType.If:
-                    return CanRuleForward(this.ifRuleProcessor.ProcessRule);
+                    return CanRuleForward(this.ifRule.Validate);
                     break;
                 case StatementType.Else:
-                    return CanRuleForward(this.elseRuleProcessor.ProcessRule);
+                    return CanRuleForward(this.elseRule.Validate);
                     break;
                 case StatementType.While:
-                    return CanRuleForward(this.whileRuleProcessor.ProcessRule);
+                    return CanRuleForward(this.whileRule.Validate);
                     break;
                 default:
                     return false;
             }
         }
 
+
+        public AST RuleForward_AST(StatementType stmtType)
+        {
+            switch (stmtType)
+            {
+                case StatementType.Assign:
+                    return this.assignRule.AST();
+                    break;
+                case StatementType.FunctionInvoke:
+                    return this.functionInvokeRule.AST();
+                    break;
+                case StatementType.Block:
+                    return this.blockRule.AST();
+                    break;
+                case StatementType.If:
+                    return this.ifRule.AST();
+                    break;
+                case StatementType.Else:
+                    return this.elseRule.AST();
+                    break;
+                case StatementType.While:
+                    return this.whileRule.AST();
+                    break;
+                default:
+                    throw new InvalidOperationException("不支持的语句");
+            }
+        }
         public void RuleForward(StatementType stmtType)
         {
             switch (stmtType)
             {
                 case StatementType.Assign:
-                    this.assignRuleProcessor.ProcessRule();
+                    this.assignRule.Validate();
                     break;
                 case StatementType.FunctionInvoke:
-                    this.functionInvokeProcessor.ProcessRule();
+                    this.functionInvokeRule.Validate();
                     break;
                 case StatementType.Block:
-                    this.blockRuleProcessor.ProcessRule();
+                    this.blockRule.Validate();
                     break;
                 case StatementType.If:
-                    this.ifRuleProcessor.ProcessRule();
+                    this.ifRule.Validate();
                     break;
                 case StatementType.Else:
-                    this.elseRuleProcessor.ProcessRule();
+                    this.elseRule.Validate();
                     break;
                 case StatementType.While:
-                    this.whileRuleProcessor.ProcessRule();
+                    this.whileRule.Validate();
                     break;
                 default:
                     throw new InvalidOperationException("不支持的语句");

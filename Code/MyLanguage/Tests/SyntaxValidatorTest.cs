@@ -1,17 +1,21 @@
 ﻿using ConsoleApplication8.Tokens.Lexers;
-using ConsoleApplication8.Tokens.Parsers.Validators;
+using ConsoleApplication8.Tokens.Parsers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication8.Tests.SingleTests
+namespace ConsoleApplication8.Tests
 {
     public class SyntaxValidatorTest
     {
         public static void Test()
         {
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("=======   语法测试     ========");
+
             Try.OnException = OnException;
 
             Try.Execute(() => DoTest("a=100+200;"));
@@ -54,7 +58,7 @@ namespace ConsoleApplication8.Tests.SingleTests
 
             var tokenParser = new Lexer(codes);
 
-            var validator = new SyntaxValidator(tokenParser);
+            var validator = new ASTParser(tokenParser);
 
             validator.Validate();
 

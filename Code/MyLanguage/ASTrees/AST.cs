@@ -1,5 +1,4 @@
 ﻿using ConsoleApplication8.Tokens;
-using ConsoleApplication8.VariableTables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +17,24 @@ namespace ConsoleApplication8.ASTrees
         public List<AST> Children { get { return this._children.AsReadOnly().ToList(); } }
         public ASTTypes ASTType { get { return this._astType; } }
 
+        public AST(ASTTypes astType):this(null, astType)
+        { 
+        }
         public AST(Token token, ASTTypes astType)
         {
             this._token = token;
+
             this._astType = astType;
+
             this._children = new List<AST>();
         }
 
         public override string ToString()
         {
-            return string.Format("{0}({1})", this.ASTType, this.Token.Text);
+            if (this.Token!=null)
+                return string.Format("{0}({1}/{2})", this.ASTType, this.Token.Text, this.Token.Type);
+            else
+                return string.Format("{0}(null)", this.ASTType);
         }
 
         public void AddChild(AST node)
@@ -35,31 +42,9 @@ namespace ConsoleApplication8.ASTrees
             this._children.Add(node);
         }
 
-        //public object Eval(Enviroment env)
-        //{
-        //    if (this._astType == ASTTypes.AssignStatement)
-        //    {
-        //        object rightValue = this.Children[1].Eval(env);
-
-        //        this.Children[0].Eval(env, rightValue);
-        //    }
-        //    else if(this._astType== ASTTypes.Expression)
-        //    {
-        //    }
-
-        //    return null;
-        //}
-
-        //public object Eval(Enviroment env, object value)
-        //{
-        //    if (this._astType == ASTTypes.Variable)
-        //    {
-        //        env.Set(this.Token.Text, value);
-
-        //        return value;
-        //    }
-
-        //    return null;
-        //}
+        public void RemoveChild(AST currentNode)
+        {
+            this._children.Remove(currentNode);
+        }
     }
 }

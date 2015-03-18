@@ -79,7 +79,7 @@ namespace ConsoleApplication8.Tokens.Parsers.Rules
         {
             AST rootNode = new ASTrees.AST(ASTTypes.Expression);
 
-            AST leftNode = GetNumberOrVariableNode();
+            AST leftNode = RuleHelper.GetNumberOrVariableNode(this.validator);
             rootNode.AddChild(leftNode);
 
             var subRightNode = leftNode;
@@ -92,7 +92,7 @@ namespace ConsoleApplication8.Tokens.Parsers.Rules
 
                 this.validator.Consume();
 
-                AST rightNode = GetNumberOrVariableNode();
+                AST rightNode = RuleHelper.GetNumberOrVariableNode(this.validator);
 
                 operatorNode.AddChild(rightNode);
 
@@ -106,26 +106,6 @@ namespace ConsoleApplication8.Tokens.Parsers.Rules
             this.validator.Consume();       //end of statement
 
             return rootNode;
-        }
-
-        private AST GetNumberOrVariableNode()
-        {
-            AST node = null;
-            if (this.validator.currentToken.Type == TokenType.Number)
-            {
-                node = new AST(this.validator.currentToken, ASTTypes.NumberLiteral);
-                this.validator.Consume();
-            }
-            else if (this.validator.currentToken.Type == TokenType.Identifier)
-            {
-                node = new AST(this.validator.currentToken, ASTTypes.Variable);
-                this.validator.Consume();
-            }
-            else
-            {
-                throw new Exception();
-            }
-            return node;
         }
     }
 }

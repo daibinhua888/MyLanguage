@@ -22,13 +22,10 @@ namespace ConsoleApplication8.Tests
             DoTest("a=100;");
             DoTest("a=100+200;");
             DoTest("a=100+200+a;");
-            DoTest("a=100+200+a-          23;", true);
+            DoTest("a=100+200+a-          23;");
 
-            //            DoTest(@"
-            //
-            //show a;
-            //
-            //");
+            DoTest("show a;");
+            DoTest("show a, b, 200;", true);
         }
 
         private static void DoTest(string codes, bool specialDisplay = false)
@@ -42,6 +39,8 @@ namespace ConsoleApplication8.Tests
             Console.WriteLine();
             Console.WriteLine();
 
+            Console.WriteLine("语句：{0}", codes);
+
             if (!specialDisplay)
                 DisplayASTree(root);
             else
@@ -49,7 +48,7 @@ namespace ConsoleApplication8.Tests
         }
         private static void DisplayASTree(AST tree)
         {
-            Console.WriteLine(tree.ToString());
+            Console.WriteLine("     "+tree.ToString());
             foreach (var node in tree.Children)
                 DisplayASTree(node);
         }

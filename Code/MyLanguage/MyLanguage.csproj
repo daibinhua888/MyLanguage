@@ -45,6 +45,7 @@
     <Compile Include="ASTrees\ASTTypes.cs" />
     <Compile Include="Tests\ASTParserTest.cs" />
     <Compile Include="Tests\SyntaxValidatorTest.cs" />
+    <Compile Include="Tokens\Parsers\Rules\RuleHelper.cs" />
     <Compile Include="Tokens\Parsers\TokenPool.cs" />
     <Compile Include="Tokens\Parsers\Rules\ElseRule.cs" />
     <Compile Include="Tokens\Parsers\ASTParser.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApplication8.ASTrees;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,7 +39,37 @@ namespace ConsoleApplication8.Tokens.Parsers.Rules
 
         public ASTrees.AST AST()
         {
-            throw new NotImplementedException();
+            AST root = new AST(ASTTypes.CallStatement);
+
+            AST methodNode = new AST(this.validator.currentToken, ASTTypes.Method);
+
+            root.AddChild(methodNode);
+
+            this.validator.Consume();       //consume variable token
+
+            AST parametersNode = ParametersAST();
+
+            root.AddChild(parametersNode);
+
+            return root;
+        }
+
+        private ASTrees.AST ParametersAST()
+        {
+            AST parametersNode = new ASTrees.AST(ASTTypes.Parameters);
+
+            AST parameterNode = RuleHelper.GetNumberOrVariableNode(this.validator);
+            parametersNode.AddChild(parameterNode);
+
+            while (this.validator.currentToken.Type != TokenType.EndOfStatement)
+            {
+                this.validator.Match(TokenType.Comma);
+
+                parameterNode = RuleHelper.GetNumberOrVariableNode(this.validator);
+                parametersNode.AddChild(parameterNode);
+            }
+
+            return parametersNode;
         }
     }
 }

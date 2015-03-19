@@ -37,7 +37,26 @@ namespace ConsoleApplication8.Tokens.Parsers.Rules
 
         public ASTrees.AST AST()
         {
-            throw new NotImplementedException();
+            ASTrees.AST root = new ASTrees.AST(ASTrees.ASTTypes.BlockStatement);
+
+            this.validator.Match(TokenType.LeftBrace);
+
+            ASTrees.AST subNode = null;
+            if (this.validator.CanRuleForward(StatementType.Assign))
+                subNode=this.validator.RuleForward_AST(StatementType.Assign);
+            else if (this.validator.CanRuleForward(StatementType.FunctionInvoke))
+                subNode = this.validator.RuleForward_AST(StatementType.FunctionInvoke);
+            else
+                throw new InvalidOperationException();
+
+            while(this.validator.currentToken.Type== TokenType.EndOfStatement)
+                this.validator.Consume();
+
+            this.validator.Match(TokenType.RightBrace);
+
+            root.AddChild(subNode);
+
+            return root;
         }
     }
 }

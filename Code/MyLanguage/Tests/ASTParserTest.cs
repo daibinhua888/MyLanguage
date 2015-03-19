@@ -25,7 +25,15 @@ namespace ConsoleApplication8.Tests
             DoTest("a=100+200+a-          23;");
 
             DoTest("show a;");
-            DoTest("show a, b, 200;", true);
+            DoTest("show a, b, 200;");
+
+            DoTest("{a=100+200+300;}");
+            DoTest("{show a, b, 200;}");
+
+            DoTest("if(a==100){a=100+b;}");
+            DoTest("if(a==100){a=100+b;}else {a=b+c;}");
+
+            DoTest("while(a==100){a=100+b;}", true);
         }
 
         private static void DoTest(string codes, bool specialDisplay = false)
@@ -58,6 +66,9 @@ namespace ConsoleApplication8.Tests
 
         private static void DisplayASTByDot(AST root)
         {
+            dotContent = string.Empty;
+            nodeDefination = string.Empty;
+
             /*
             digraph hello {
                     A -> B;    A -> C;   B -> D;    C -> D
@@ -72,12 +83,16 @@ digraph hello {
             }
 ";
 
+            string fileName = Guid.NewGuid().ToString("N");
             //save
-            FileHelper.Save(txtContext, "test.txt");
+            FileHelper.Save(txtContext, string.Format("{0}.txt", fileName));
+
             //execute
-            var p=Process.Start("dot.exe", " -Tpng test.txt -o test.png");
+            var p = Process.Start("dot.exe", string.Format(" -Tpng {0}.txt -o {0}.png", fileName));
             p.WaitForExit();
-            Process.Start("test.png");
+
+            //display image file
+            Process.Start(string.Format("{0}.png", fileName));
         }
 
         private static void WalkTree(AST root)

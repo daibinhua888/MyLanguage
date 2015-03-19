@@ -30,7 +30,15 @@ namespace ConsoleApplication8.Tokens.Parsers.Rules
 
         public ASTrees.AST AST()
         {
-            throw new NotImplementedException();
+            this.validator.MatchAnd(TokenType.Identifier, "else");
+
+            ASTrees.AST root = new ASTrees.AST(ASTrees.ASTTypes.ElseBranch);
+
+            ASTrees.AST subNode = this.validator.RuleForward_AST(StatementType.Block);
+
+            root.AddChild(subNode);
+
+            return root;
         }
     }
 }

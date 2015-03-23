@@ -45,6 +45,12 @@ namespace ConsoleApplication8.Tests
             Try.Execute(() => DoTest("while(a==100){a=100+200+600+;}"));
             Try.Execute(() => DoTest("while(a==100){a=100+200+600+a;}"));
             Try.Execute(() => DoTest("while(a==100){a=a+1;}"));
+
+            Try.Execute(() => DoTest("a=a+1;"));
+            Try.Execute(() => DoTest("a=100+200*2+300;"));
+            Try.Execute(() => DoTest("a=100+200*(2+300);"));
+            Try.Execute(() => DoTest("a=100+200*(2+300*(1+2));"));
+            Try.Execute(() => DoTest("a=100+200*(2+300*((1+2));"));
         }
 
         private static void OnException()

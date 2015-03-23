@@ -18,34 +18,61 @@ namespace ConsoleApplication8.Tokens.Parsers.Rules
 
         public void Validate()
         {
-            AssignStatementRule();
+            Rule();
         }
 
-        private void AssignStatementRule()
+        private void Rule()
         {
             this.validator.Match(TokenType.Identifier);
             this.validator.Match(TokenType.Equals);
-            ExpressionRule();
+            Expression();
         }
 
-        private void ExpressionRule()
+        private void Expression()
         {
-            if (this.validator.CanRuleForward(ExpressionRule_MultipleNumberExpression))
-                ExpressionRule_MultipleNumberExpression();
-            else
-                throw new InvalidOperationException();
+            while(this.validator.currentToken.Type != TokenType.EndOfStatement
+                &&
+                this.validator.currentToken.Type != TokenType.RightRoundBracket)
+            {
+                if (this.validator.currentToken.Type == TokenType.LeftRoundBracket)
+                {
+                    Term();
+                }
+                else if (this.validator.currentToken.Type == TokenType.Number
+                    ||
+                    this.validator.currentToken.Type == TokenType.Identifier)
+                {
+                    SingleNumber();
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                }
+
+                if (this.validator.currentToken.Type != TokenType.EndOfStatement
+                    &&
+                    this.validator.currentToken.Type != TokenType.RightRoundBracket)
+                    this.validator.MatchOne(TokenType.Plus, TokenType.Minus, TokenType.Multiply, TokenType.Divide);
+            }
         }
 
-        //NUMBER (+|-|*|/) NUMBER (+|-|*|/) NUMBER (+|-|*|/) NUMBER
-        private void ExpressionRule_MultipleNumberExpression()
+        private void Term()
+        {
+            this.validator.Match(TokenType.LeftRoundBracket);
+
+            while (this.validator.currentToken.Type != TokenType.EndOfStatement
+                &&
+                this.validator.currentToken.Type != TokenType.RightRoundBracket)
+            {
+                Expression();
+            }
+
+            this.validator.Match(TokenType.RightRoundBracket);
+        }
+        
+        private void SingleNumber()
         {
             this.validator.MatchOne(TokenType.Number, TokenType.Identifier);
-            while (this.validator.currentToken.Type != TokenType.EndOfStatement)
-            {
-                this.validator.MatchOne(TokenType.Plus, TokenType.Minus, TokenType.Multiply, TokenType.Divide);
-                this.validator.MatchOne(TokenType.Number, TokenType.Identifier);
-            }
-            this.validator.Match(TokenType.EndOfStatement);
         }
 
 
@@ -53,46 +80,38 @@ namespace ConsoleApplication8.Tokens.Parsers.Rules
         {
             AST root = new AST( ASTTypes.AssignStatement);
 
-            AST leftVariableNode = new AST(this.validator.currentToken, ASTTypes.Variable);
+            AST left = new AST(this.validator.currentToken, ASTTypes.Variable);
 
-            root.AddChild(leftVariableNode);
+            root.AddChild(left);
 
             this.validator.Consume();       //consume variable token
             this.validator.Consume();       //consume = token
 
-            AST rightExpressionNode=ExpressionAST();
+            AST right=Expression_AST();
 
-            root.AddChild(rightExpressionNode);
+            root.AddChild(right);
 
             return root;
         }
 
-        private AST ExpressionAST()
-        {
-            if (this.validator.CanRuleForward(ExpressionRule_MultipleNumberExpression))
-                return ExpressionRule_MultipleNumberExpression_AST();
-            else
-                throw new InvalidOperationException();
-        }
-
-        private AST ExpressionRule_MultipleNumberExpression_AST()
+        private AST Expression_AST()
         {
             AST rootNode = new ASTrees.AST(ASTTypes.Expression);
-
-            AST leftNode = RuleHelper.GetNumberOrVariableNode(this.validator);
+            AST leftNode = GetOneNode();
             rootNode.AddChild(leftNode);
 
             var subRightNode = leftNode;
             var parentNode = rootNode;
 
-            while (this.validator.currentToken.Type != TokenType.EndOfStatement)
+            while (this.validator.currentToken.Type != TokenType.EndOfStatement
+                &&
+                this.validator.currentToken.Type != TokenType.RightRoundBracket)
             {
                 var operatorNode = new AST(this.validator.currentToken, ASTTypes.Operator);
                 operatorNode.AddChild(subRightNode);
 
                 this.validator.Consume();
-
-                AST rightNode = RuleHelper.GetNumberOrVariableNode(this.validator);
+                AST rightNode = GetOneNode();
 
                 operatorNode.AddChild(rightNode);
 
@@ -106,6 +125,48 @@ namespace ConsoleApplication8.Tokens.Parsers.Rules
             this.validator.Consume();       //end of statement
 
             return rootNode;
+        }
+
+        private ASTrees.AST GetOneNode()
+        {
+            if (this.validator.currentToken.Type == TokenType.LeftRoundBracket)
+            {
+                return Term_AST();
+            }
+            else if (this.validator.currentToken.Type == TokenType.Number
+                ||
+                this.validator.currentToken.Type == TokenType.Identifier)
+            {
+                return SingleNumber_AST();
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
+        }
+
+        private AST Term_AST()
+        {
+            AST rootNode = new ASTrees.AST(ASTTypes.Term);
+
+            this.validator.Match(TokenType.LeftRoundBracket);
+
+            //while (this.validator.currentToken.Type != TokenType.EndOfStatement
+            //    &&
+            //    this.validator.currentToken.Type != TokenType.RightRoundBracket)
+            //{
+            //    rootNode.AddChild(Expression_AST());
+            //}
+            rootNode.AddChild(Expression_AST());
+
+            //this.validator.Match(TokenType.RightRoundBracket);
+
+            return rootNode;
+        }
+
+        private AST SingleNumber_AST()
+        {
+            return RuleHelper.GetNumberOrVariableNode(this.validator);
         }
     }
 }

@@ -19,21 +19,38 @@ namespace ConsoleApplication8.Tests
             Console.WriteLine();
             Console.WriteLine("=======   AST语法树测试     ========");
 
-            DoTest("a=100;");
-            DoTest("a=100+200;");
-            DoTest("a=100+200+a;");
-            DoTest("a=100+200+a-          23;");
+            Try.OnException = OnException;
 
-            DoTest("show a;");
-            DoTest("show a, b, 200;");
+            Try.Execute(() =>DoTest("a=100;"));
+            Try.Execute(() =>DoTest("a=100+200;"));
+            Try.Execute(() =>DoTest("a=100+200+a;"));
+            Try.Execute(() =>DoTest("a=100+200+a-          23;"));
 
-            DoTest("{a=100+200+300;}");
-            DoTest("{show a, b, 200;}");
+            Try.Execute(() =>DoTest("show a;"));
+            Try.Execute(() =>DoTest("show a, b, 200;"));
 
-            DoTest("if(a==100){a=100+b;}");
-            DoTest("if(a==100){a=100+b;}else {a=b+c;}");
+            Try.Execute(() =>DoTest("{a=100+200+300;}"));
+            Try.Execute(() =>DoTest("{show a, b, 200;}"));
 
-            DoTest("while(a==100){a=100+b;}", true);
+            Try.Execute(() =>DoTest("if(a==100){a=100+b;}"));
+            Try.Execute(() =>DoTest("if(a==100){a=100+b;}else {a=b+c;}"));
+
+            Try.Execute(() =>DoTest("while(a==100){a=100+b;}"));
+
+            Try.Execute(() =>DoTest("a=100+200*2+300;"));
+
+            Try.Execute(() => DoTest("a=100;"));
+            Try.Execute(() => DoTest("a=100+30;"));
+            Try.Execute(() => DoTest("a=100+300-200;"));
+            Try.Execute(() => DoTest("a=(100+300)-200;"));
+            Try.Execute(() => DoTest("a=100+(300-200);"));
+            Try.Execute(() => DoTest("a=100+(300-200)+a;"));
+            Try.Execute(() => DoTest("a=100+(200*2)+300+(2*1);", true));
+        }
+
+        private static void OnException()
+        {
+            Console.WriteLine("         Exception");
         }
 
         private static void DoTest(string codes, bool specialDisplay = false)

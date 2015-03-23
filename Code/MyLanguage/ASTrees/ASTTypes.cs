@@ -34,6 +34,7 @@ namespace ConsoleApplication8.ASTrees
         NumberLiteral,
 
         Expression,
+        Term,
         Parameters,
 
         Variable,               //表示变量

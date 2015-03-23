@@ -44,6 +44,8 @@ a=100  +   200         ;
             DoTest("show a, 100;");
 
             DoTest("if(a==100){myfuncation 100;}else{myfun111cation 200;}");
+
+            DoTest("a=100+200*2+300; ");
         }
 
         private static void DoTest(string codes)

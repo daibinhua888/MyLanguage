@@ -94,6 +94,19 @@ namespace ConsoleApplication8.Tokens.Parsers
 
             throw new InvalidOperationException();
         }
+        public void MatchOne_ButDontConsume(TokenType tokenType, params TokenType[] tokenTypes)
+        {
+            List<TokenType> checkingTokenTypes = new List<TokenType>();
+            checkingTokenTypes.Add(tokenType);
+
+            if (tokenTypes != null)
+                checkingTokenTypes.AddRange(tokenTypes);
+
+            if (checkingTokenTypes.Contains(this.currentToken.Type))
+                return;
+
+            throw new InvalidOperationException();
+        }
 
         public void MatchAnd(TokenType tokenType, string tokenText)
         {

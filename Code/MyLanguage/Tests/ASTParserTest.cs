@@ -33,7 +33,8 @@ namespace ConsoleApplication8.Tests
             Try.Execute(() =>DoTest("{show a, b, 200;}"));
 
             Try.Execute(() =>DoTest("if(a==100){a=100+b;}"));
-            Try.Execute(() =>DoTest("if(a==100){a=100+b;}else {a=b+c;}"));
+            Try.Execute(() =>DoTest("if(a==100){a=100+b;}else {a=b+c;}", true));
+            Try.Execute(() => DoTest("if(a==100){a=100+b-(10*20);}else {a=b+c;}", true));
 
             Try.Execute(() =>DoTest("while(a==100){a=100+b;}"));
 
@@ -44,7 +45,7 @@ namespace ConsoleApplication8.Tests
             Try.Execute(() => DoTest("a=100+300-200;"));
             Try.Execute(() => DoTest("a=(100+300)-200;"));
             Try.Execute(() => DoTest("a=100+(300-200);"));
-            Try.Execute(() => DoTest("a=100+(300-200)+a;"));
+            Try.Execute(() => DoTest("a=100+(300-200)+a;", true));
             Try.Execute(() => DoTest("a=100+(200*2)+300+(2*1);", true));
         }
 
@@ -66,6 +67,8 @@ namespace ConsoleApplication8.Tests
 
             Console.WriteLine("语句：{0}", codes);
 
+            tmpCodes = codes;
+
             if (!specialDisplay)
                 DisplayASTree(root);
             else
@@ -80,6 +83,7 @@ namespace ConsoleApplication8.Tests
 
         private static string dotContent = string.Empty;
         private static string nodeDefination = string.Empty;
+        private static string tmpCodes = string.Empty;
 
         private static void DisplayASTByDot(AST root)
         {
@@ -95,6 +99,7 @@ namespace ConsoleApplication8.Tests
 
             string txtContext = @"
 digraph hello {
+                    Title[label=""" + tmpCodes + @"""]
                     " + nodeDefination + @"
                     " +dotContent+@"
             }

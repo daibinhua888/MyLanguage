@@ -52,8 +52,14 @@ namespace ConsoleApplication8.Tokens.Parsers.Rules
                 if (this.validator.currentToken.Type != TokenType.EndOfStatement
                     &&
                     this.validator.currentToken.Type != TokenType.RightRoundBracket)
+                {
                     this.validator.MatchOne(TokenType.Plus, TokenType.Minus, TokenType.Multiply, TokenType.Divide);
+                    this.validator.MatchOne_ButDontConsume(TokenType.LeftRoundBracket, TokenType.Identifier, TokenType.Number, TokenType.Plus, TokenType.Minus, TokenType.Multiply, TokenType.Divide);
+                }
             }
+
+            if (this.validator.currentToken.Type == TokenType.EndOfStatement)
+                this.validator.Consume();
         }
 
         private void Term()
@@ -151,15 +157,7 @@ namespace ConsoleApplication8.Tokens.Parsers.Rules
 
             this.validator.Match(TokenType.LeftRoundBracket);
 
-            //while (this.validator.currentToken.Type != TokenType.EndOfStatement
-            //    &&
-            //    this.validator.currentToken.Type != TokenType.RightRoundBracket)
-            //{
-            //    rootNode.AddChild(Expression_AST());
-            //}
             rootNode.AddChild(Expression_AST());
-
-            //this.validator.Match(TokenType.RightRoundBracket);
 
             return rootNode;
         }

@@ -1,5 +1,0 @@
-
-digraph hello {
-                    2637164[label="AssignStatement(null)"];41014879[label="Variable(a/Identifier)"];3888474[label="Expression(null)"];25209742[label="Operator(/Plus)"];26966483[label="NumberLiteral(100/Number)"];31884011[label="Operator(/Plus)"];32176063[label="Term(null)"];65326725[label="Expression(null)"];61150033[label="Operator(/Multiply)"];24123405[label="NumberLiteral(200/Number)"];49535530[label="NumberLiteral(2/Number)"];44150175[label="Operator(/Plus)"];17690816[label="NumberLiteral(300/Number)"];54234833[label="Term(null)"];9035653[label="Expression(null)"];34917486[label="Operator(/Multiply)"];22330821[label="NumberLiteral(2/Number)"];43148459[label="NumberLiteral(1/Number)"];
-                    2637164 -> 41014879;2637164 -> 3888474;3888474 -> 25209742;25209742 -> 26966483;25209742 -> 31884011;31884011 -> 32176063;31884011 -> 44150175;32176063 -> 65326725;65326725 -> 61150033;61150033 -> 24123405;61150033 -> 49535530;44150175 -> 17690816;44150175 -> 54234833;54234833 -> 9035653;9035653 -> 34917486;34917486 -> 22330821;34917486 -> 43148459;
-            }

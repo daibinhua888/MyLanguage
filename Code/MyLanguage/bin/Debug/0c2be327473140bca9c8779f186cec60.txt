@@ -1,5 +1,0 @@
-
-digraph hello {
-                    61150033[label="BlockStatement(null)"];24123405[label="CallStatement(null)"];49535530[label="Method(show/Identifier)"];17690816[label="Parameters(null)"];54234833[label="Variable(a/Identifier)"];9035653[label="Variable(b/Identifier)"];34917486[label="NumberLiteral(200/Number)"];
-                    61150033 -> 24123405;24123405 -> 49535530;24123405 -> 17690816;17690816 -> 54234833;17690816 -> 9035653;17690816 -> 34917486;
-            }

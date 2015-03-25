@@ -43,8 +43,12 @@
   <ItemGroup>
     <Compile Include="ASTrees\AST.cs" />
     <Compile Include="ASTrees\ASTTypes.cs" />
+    <Compile Include="RuntimeEnviroment\SymbolTable.cs" />
     <Compile Include="Tests\ASTParserTest.cs" />
+    <Compile Include="Tests\InterpreterTest.cs" />
     <Compile Include="Tests\SyntaxValidatorTest.cs" />
+    <Compile Include="Tokens\Interpreters\ASTProcessor.cs" />
+    <Compile Include="Tokens\Interpreters\DefaultInterpreter.cs" />
     <Compile Include="Tokens\Parsers\Rules\RuleHelper.cs" />
     <Compile Include="Tokens\Parsers\TokenPool.cs" />
     <Compile Include="Tokens\Parsers\Rules\ElseRule.cs" />

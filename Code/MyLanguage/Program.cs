@@ -18,6 +18,8 @@ namespace ConsoleApplication8
 
             ASTParserTest.Test();                   //构造AST树测试
 
+            InterpreterTest.Test();                 //解释器测试
+
             Console.WriteLine("OK");
             Console.ReadKey();
         }
